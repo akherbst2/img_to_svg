@@ -13,9 +13,12 @@ def main():
     plt.figure(figsize=(12, 2))
     print('running')
     img = mpimg.imread('huhcat.jpg')
-    img = skimage.filters.gaussian(img, 10)
+    # img = skimage.filters.gaussian(img, 10)
     gray = rgb2gray(img)
-    plt.imshow(gray, cmap=plt.get_cmap('gray'))
+    out = skimage.filters.threshold_otsu(gray)
+    print(out)
+    mask = gray < out
+    plt.imshow(mask, cmap=plt.get_cmap('gray'))
     plt.show()
 
     print('done')
